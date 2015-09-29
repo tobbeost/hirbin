@@ -1,0 +1,4 @@
+name	group	assembly
+DLM002	t2d	../t2d/contigs/DLM002.contigs.m100
+DLM003	t2d	../t2d/contigs/DLM003.contigs.m100
+DLM004	t2d	../t2d/contigs/DLM004.contigs.m100
