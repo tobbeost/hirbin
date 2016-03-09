@@ -1,6 +1,8 @@
+#!/usr/bin/env python
 #one sample at a time for parallelization purposes
 def load_annotation_pfam(filename):
     #  function for loading annotation and coordinates from COG, Pfam and TIGRfam
+    #input file= .hmm file from hmmsearch
     import os
     #list the annotation files in annotation directory
     print "loading annotation from file " + filename
