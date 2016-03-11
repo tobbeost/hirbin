@@ -31,6 +31,8 @@ def main(filelist):
           name=line.split('\t')[0]
           count=int(line.split('\t')[1])
           tigrfam=name.split('_')[2].split(':')[0]
+          if tigrfam in str(range(0,10)): #check if TIGRFAM name ends with _1
+            tigrfam=name.split('_')[3].split(':')[0]
           if tigrfam not in domains:
              domains[tigrfam]={}
              for i in samplelist:

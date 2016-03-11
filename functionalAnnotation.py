@@ -85,7 +85,7 @@ def createOutputDirectory(output_directory,protseq_dir,force):
     while not not_created_dir:
       if os.path.isdir(new_output_dir):
         suffix=suffix+1
-        new_output_dir='hierbin_output_'+str(suffix)
+        new_output_dir='hirbin_output_'+str(suffix)
       else:
         not_created_dir=True
     try:
