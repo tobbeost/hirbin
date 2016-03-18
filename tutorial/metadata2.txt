@@ -1,0 +1,11 @@
+name  group  reference
+DLM005  t2d  tutorial_data/data/DLM005.fasta
+DOM005  t2d  tutorial_data/data/DOM005.fasta
+DOM012  t2d  tutorial_data/data/DOM012.fasta
+DOM017  t2d  tutorial_data/data/DOM017.fasta
+DOM025  t2d  tutorial_data/data/DOM025.fasta
+NLM021  control  tutorial_data/data/NLM021.fasta
+NLM031  control  tutorial_data/data/NLM031.fasta
+NOM008  control  tutorial_data/data/NOM008.fasta
+NOM017  control  tutorial_data/data/NOM017.fasta
+NOM026  control  tutorial_data/data/NOM026.fasta

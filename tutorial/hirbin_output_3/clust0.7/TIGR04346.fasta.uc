@@ -1,0 +1,9 @@
+S	0	266	*	.	*	*	*	scaffold24182_2_2	*
+S	1	64	*	.	*	*	*	scaffold24182_2_2	*
+S	2	112	*	.	*	*	*	scaffold24182_3_3	*
+H	2	126	88.4	.	0	0	14D112M	scaffold57880_1_6	scaffold24182_3_3
+S	3	242	*	.	*	*	*	scaffold693_3_2	*
+C	0	1	*	*	*	*	*	scaffold24182_2_2	*
+C	1	1	*	*	*	*	*	scaffold24182_2_2	*
+C	2	2	*	*	*	*	*	scaffold24182_3_3	*
+C	3	1	*	*	*	*	*	scaffold693_3_2	*

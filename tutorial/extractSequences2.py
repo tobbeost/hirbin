@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 #one sample at a time for parallelization purposes
 def load_annotation_pfam(filename):
     #  function for loading annotation and coordinates from COG, Pfam and TIGRfam

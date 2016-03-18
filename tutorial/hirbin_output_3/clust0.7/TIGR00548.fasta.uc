@@ -1,0 +1,10 @@
+S	0	63	*	.	*	*	*	scaffold14270_1_3	*
+S	1	107	*	.	*	*	*	scaffold26086_3_1	*
+S	2	196	*	.	*	*	*	scaffold6414_2_4	*
+H	0	201	100.0	.	0	0	138D63M	scaffold33346_3_2	scaffold14270_1_3
+H	1	201	97.2	.	0	0	107M94D	scaffold9844_4_1	scaffold26086_3_1
+H	0	118	71.4	.	0	0	55D63M	scaffold26086_3_3	scaffold14270_1_3
+H	1	201	76.6	.	0	0	107M94D	scaffold3915_2_6	scaffold26086_3_1
+C	0	3	*	*	*	*	*	scaffold14270_1_3	*
+C	1	3	*	*	*	*	*	scaffold26086_3_1	*
+C	2	1	*	*	*	*	*	scaffold6414_2_4	*
