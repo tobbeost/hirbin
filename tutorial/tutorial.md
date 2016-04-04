@@ -13,7 +13,7 @@ Start with having a look at the tutorial data. The example data used here is a s
 Step 1: Prepare the metadata file
 ----------------------------------
 
-HirBin uses the same metadata file throughout all analysis. In the metadata files the absolute or relative file paths to the different files are defined together with groups used for the statistical analysis. Create a file called `metadata.txt` in the tutorial directory and paste the following information:
+HirBin uses the same metadata file throughout all analysis. In the metadata files the absolute or relative file paths to the different files are defined together with groups used for the statistical analysis. Since all samples are clustered together, it is necessary to run all samples in the same run. Create a file called `metadata.txt` in the tutorial directory and paste the following information:
 
     name  group  reference  annotation  counts
     DLM005  t2d  tutorial_data/contigs/protseq/DLM005.fasta  tutorial_data/TIGRFAM/DLM005.hmmout  tutorial_data/mapping_results2/DLM005.fastq.tab
