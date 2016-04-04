@@ -1,8 +1,9 @@
-#!/usr/bin/env python2.6
+#!/usr/bin/env python
 # coding: utf-8
 #HirBin function clusterBinsToSubbins
-from parsers import *
-from thirdparty import runUclust
+
+from hirbin/parsers import *
+from hirbin/thirdparty import runUclust
 import os
 from Bio import SeqIO
 from Bio.SeqFeature import SeqFeature, FeatureLocation

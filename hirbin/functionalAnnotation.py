@@ -1,6 +1,7 @@
-#!/usr/bin/env python2.6
+#!/usr/bin/env python
 # coding: utf-8
-from parsers import *
+
+from hirbin/parsers import *
 import os
 from os import path, mkdir
 from os.path import isdir
