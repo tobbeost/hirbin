@@ -2,8 +2,8 @@
 # coding: utf-8
 #HirBin function clusterBinsToSubbins
 
-from hirbin/parsers import *
-from hirbin/thirdparty import runUclust
+from hirbin.parsers import *
+from hirbin.thirdparty import runUclust
 import os
 from Bio import SeqIO
 from Bio.SeqFeature import SeqFeature, FeatureLocation
