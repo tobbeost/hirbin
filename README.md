@@ -5,6 +5,13 @@ Hirbin (High-resolution binning) is a python package for binning and sub-binning
 It combines supervised functional annotation using e.g. PFAM, TIGRFAM or COGs, with an unsupervised clustering step 
 where the sequences in each bin are clustered using `Uclust`.
 
+The four main hirbin programs are:
+
+    functionalAnnotation.py
+	clusterBinsToSubbins.py
+	mappingReads.py
+	statisticalAnalysis.py
+
 
 Installation
 -------------
@@ -29,15 +36,17 @@ After installing the python dependencies, clone hirbin using git and install the
 	git clone https://github.com/tobbeost/hirbin.git
 	pip install hirbin/
 
-
-The four main hirbin programs are:
-
-    functionalAnnotation.py
-	clusterBinsToSubbins.py
-	mappingReads.py
-	statisticalAnalysis.py
-
 After installation type e.g. `functionalAnnotation.py -h` to see the options for the program.
 
 
+
 ### Install external programs
+
+Depending on which part of Hirbin you want to use you need to install some external
+programs and add them to the path environmental variable, so that Hirbin can find them.
+
+The external programs needed are:
+* [hmmer3](http://hmmer.org/) (used by `functionalAnnotation.py`)
+* [EMBOSS transeq (v6.5.7)](ftp://emboss.open-bio.org/pub/EMBOSS/old/6.5.0/) (used by `functionalAnnotation.py`)
+* [USEARCH (uclust) ](http://www.drive5.com/usearch/download.html) (used by `clusterBinsToSubbins.py`)
+* [R](https://cran.r-project.org/) (used by `statisticalAnalysis.py`)
