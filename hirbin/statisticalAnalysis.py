@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 #HirBin function statisticalAnalysis
+from hirbin import *
 from hirbin.parsers import *
 import os
 import argparse

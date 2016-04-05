@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from hirbin.parsers import *
+import hirbin.parsers
 import os
 from os import path, mkdir
 from os.path import isdir

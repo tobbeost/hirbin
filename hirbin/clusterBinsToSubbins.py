@@ -2,6 +2,7 @@
 # coding: utf-8
 #HirBin function clusterBinsToSubbins
 
+from hirbin import *
 from hirbin.parsers import *
 from hirbin.thirdparty import runUclust
 import os
