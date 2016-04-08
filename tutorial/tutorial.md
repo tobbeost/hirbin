@@ -32,7 +32,7 @@ Note: Here the reads from each sample have been mapped to sample-specific refere
 
 Step 2: Unsupervised clustering (sub-binning)
 ----------------------------------------------
-After creating the metadata file the next step is to cluster the bins into sub-bins using `uclust`. Here, we will cluster the sequences using a 70% sequcne identity cutoff at the amino acid level. This is done by using the HirBin function `clusterBinsToSubbins.py`, in the following way:
+After creating the metadata file the next step is to cluster the bins into sub-bins using `uclust`. Here, we will cluster the sequences using a 70% sequence identity cutoff at the amino acid level. This is done by using the HirBin function `clusterBinsToSubbins.py`, in the following way:
 
 
     clusterBinsToSubbins.py -m metadata.txt -id 0.7 -o hirbin_output

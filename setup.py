@@ -8,9 +8,8 @@ setup(name='hirbin',
       url='http://github.com/tobbeost/hirbin',
       author='Tobias Osterlund',
       author_email='tobiaso@chalmers.se',
-      license='MIT',
       packages=setuptools.find_packages(),
-      package_data={'tentacle': ['README.md']
+      package_data={'hirbin': ['README.md', 'hirbin/scripts/statistical_analysis.R']
                    },
       install_requires=['Biopython', 
                         'multiprocessing'],

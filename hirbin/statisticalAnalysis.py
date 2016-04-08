@@ -6,6 +6,7 @@ from hirbin.parsers import *
 import os
 import argparse
 import sys
+import pkg_resources
 def parseArgs():
   ''' 
     Function for parsing arguments 
@@ -26,17 +27,16 @@ def main(mapping_file,output_dir,ref):
   for sample in metadata.samples:
     groups.append(metadata.groups[sample])
   groupslist=','.join(groups)
-  print groupslist
   if (ref is None):
     ref=groups[-1]
-  print ref
   filelist=os.listdir(output_dir)
   for filename in filelist:
     if filename.startswith('abundance_matrix'):
       filename=output_dir+'/'+filename
       print "Running statistical analysis for "+filename
       command=groupslist+' '+ref+' '+filename
-      os.system('Rscript /home/tobiaso/hierbin/hirbin/hirbin/scripts/statistical_analysis.R ' + command)
+      path = pkg_resources.resource_filename('hirbin', 'statistical_analysis.R')
+      os.system('Rscript '+path+ ' ' + command)
   
 if __name__=='__main__':
   arguments=parseArgs()

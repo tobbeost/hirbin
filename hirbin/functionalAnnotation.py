@@ -49,56 +49,6 @@ def runHMMer(sample_dict,ncpus,output_dir,database_dir,evalue_cutoff,protseq_dir
 def functionalAnnotationOneSample(argument):
   ''' Run HMMer for one sample using 1 cpu'''
   os.system('hmmsearch '+ argument +'> /dev/null') #dispose unwanted output to /dev/null
-  
-
-def readMappingFile(mapping_file):
-  '''
-  Reads in the sample mapping/metadata file and creates a dictionary 
-  with sample names and file path to assembly for that sample.
-  '''
-  with open(mapping_file) as f:
-    line=f.readline() #skip header
-    samples={}
-    for line in f:
-      line=line.rstrip()
-      line=line.split('\t')
-      samplename=line[0]
-      samplepath=line[-1]
-      if samplename not in samples:
-        samples[samplename]=samplepath
-    return samples
-
-def createOutputDirectory(output_directory,protseq_dir,force):
-  ''' Function for creating a new output directory. If the name is not specified, decide a new name '''
-  if output_directory==None: #no output directory specified, create a new output directory
-    new_output_dir='hierbin_output'
-    not_created_dir=False
-    suffix=1
-    #create a new name for the output directory
-    while not not_created_dir:
-      if os.path.isdir(new_output_dir):
-        suffix=suffix+1
-        new_output_dir='hirbin_output_'+str(suffix)
-      else:
-        not_created_dir=True
-    try:
-      mkdir(new_output_dir)
-      if protseq_dir==None:
-        mkdir(new_output_dir+'/protseq/')
-      output_directory=new_output_dir
-    except OSError as e:
-      if not force:
-        raise
-  else:
-    try:
-      mkdir(output_directory)
-      if protseq_dir==None:
-        mkdir(output_directory+'/protseq/')
-    except OSError as e:
-      if not force:
-        raise
-  print output_directory
-  return(output_directory)
 
 def main(mapping_file,database_dir,output_directory,type,ncpus,evalue_cutoff,force):
   metadata=Hirbin_run(output_directory)
@@ -118,7 +68,8 @@ def main(mapping_file,database_dir,output_directory,type,ncpus,evalue_cutoff,for
     except OSError as e:
       if not force:
         raise
-    runHMMer(metadata.reference,ncpus,output_directory,database_dir,evalue_cutoff,protseq_dir) #perform functional annotation using HMMer
+    runHMMer(metadata.reference,ncpus,output_directory,database_dir,evalue_cutoff,protseq_dir)
+    #perform functional annotation using HMMer
 
 if __name__=='__main__':
   arguments=parseArgs(sys.argv[1:])

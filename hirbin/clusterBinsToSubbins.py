@@ -32,44 +32,50 @@ def parseArgs():
 
   
 def extract_sequences_one_sample(args):
-    (fasta_path,annotation_path,sample, output_dir)=args
-    domainInfo=load_annotation_pfam(annotation_path)
-    print "Generating domain fasta sequences for "+sample+" ..."
-    from Bio import SeqIO
-    from Bio.SeqFeature import SeqFeature, FeatureLocation
-    from Bio.SeqRecord import SeqRecord 
-    (annot,start,stop,strand,evalue)=domainInfo
-    record_dict=index_fasta(fasta_path)
-    recordlist=[]
-    outfilename=output_dir +'/forClustering/'+ sample +'.fasta'
-    outhandle=open(outfilename,'w')
-    for domainID in annot.keys():
-        for i in range(len(annot[domainID])):
-            domain=annot[domainID][i]
-            try:
-                seq=record_dict[domain]
-            except KeyError:
-               print "Error: " + domain + " not in fasta file.\n"
-               break    
-            a=start[domainID][i]
-            b=stop[domainID][i]
-            seq_strand=strand[domainID][i]
-            seq_evalue=evalue[domainID][i]
-            if seq_strand in '+':
-               domain_feature = SeqFeature(FeatureLocation(a-1, b-1), type="domain", strand=1)
-            elif seq_strand in '-':
-                 domain_feature = SeqFeature(FeatureLocation(a-1, b-1), type="domain", strand=-1)
-            feature_seq = domain_feature.extract(seq)
-            feature_seq.id=feature_seq.id+' '+domainID+' '+seq_evalue 
-            recordlist.append(feature_seq)
-    
-    
-    SeqIO.write(recordlist, outhandle, "fasta")
-    outhandle.close()
-    
-    print "done"
+  '''
+    Function for extracting protein sequences given annotated regions and produce fasta files that can be used for clustering
+  '''
+  (fasta_path,annotation_path,sample, output_dir)=args
+  domainInfo=load_annotation_pfam(annotation_path)
+  print "Generating domain fasta sequences for "+sample+" ..."
+  from Bio import SeqIO
+  from Bio.SeqFeature import SeqFeature, FeatureLocation
+  from Bio.SeqRecord import SeqRecord 
+  (annot,start,stop,strand,evalue)=domainInfo
+  record_dict=index_fasta(fasta_path)
+  recordlist=[]
+  outfilename=output_dir +'/forClustering/'+ sample +'.fasta'
+  outhandle=open(outfilename,'w')
+  for domainID in annot.keys():
+      for i in range(len(annot[domainID])):
+          domain=annot[domainID][i]
+          try:
+              seq=record_dict[domain]
+          except KeyError:
+             print "Error: " + domain + " not in fasta file.\n"
+             break    
+          a=start[domainID][i]
+          b=stop[domainID][i]
+          seq_strand=strand[domainID][i]
+          seq_evalue=evalue[domainID][i]
+          if seq_strand in '+':
+             domain_feature = SeqFeature(FeatureLocation(a-1, b-1), type="domain", strand=1)
+          elif seq_strand in '-':
+               domain_feature = SeqFeature(FeatureLocation(a-1, b-1), type="domain", strand=-1)
+          feature_seq = domain_feature.extract(seq)
+          feature_seq.id=feature_seq.id+' '+domainID+' '+seq_evalue 
+          recordlist.append(feature_seq)
+  
+  
+  SeqIO.write(recordlist, outhandle, "fasta")
+  outhandle.close()
+  
+  print "done"
 
 def getSequencesPerDomain(metadata):
+  '''
+    Function for creating one fasta file per domain (TIGRFAM/PFAM) that can be used as input to the clustering
+  '''
   outputdir=metadata.output_directory
   filelist=[outputdir+'/forClustering/'+samplename+".fasta" for samplename in metadata.reference.keys()]
   domains={}
@@ -94,6 +100,9 @@ def getSequencesPerDomain(metadata):
 
 
 def extractSequences(metadata,n,force):
+  '''
+    Function for extracting protein sequences given annotated regions and produce fasta files that can be used for clustering
+  '''
   outputdir=metadata.output_directory
   try:
     os.mkdir(outputdir+'/forClustering/')
@@ -111,6 +120,10 @@ def extractSequences(metadata,n,force):
   getSequencesPerDomain(metadata)
   
 def getSubBins(groups,clustpath,cutoffnumber,minMeanCount,identity,countDict):
+  '''
+    Creating a dictonary with the structure of the sub-bins, i.e. which contigs that are included in each sub-bin.
+    The sub-bins not passing the criteria numberOfSamples > cutoffnumber and meanCount>minMeanCount are excluded.
+  '''
   samplelisttotal=groups.keys()
   cutoff=round(len(samplelisttotal)*cutoffnumber)
   domainlist=os.listdir(clustpath)
@@ -190,14 +203,14 @@ def main(mappingFile,output_directory,type,p,minMeanCount,identity,n,force):
   metadata.output_directory=output_directory
   extractSequences(metadata,n,force)
   try:
-    os.mkdir(output_directory+'/clust'+str(identity))
+    os.mkdir(output_directory+'/clust'+str(identity)) #create a directory for the clustering files
   except OSError as e:
     if not force:
       raise
-  runUclust(output_directory+"/forClustering/",identity)
-  countDict=getCountStruct(metadata)
-  getSubBins(metadata.groups,output_directory+"/clust"+str(identity),p,minMeanCount,identity,countDict)
-  domains=createAbundanceMatrix(metadata,p,minMeanCount)
+  runUclust(output_directory+"/forClustering/",identity) #run the clustering step
+  countDict=getCountStruct(metadata) #read the results from the mapping
+  getSubBins(metadata.groups,output_directory+"/clust"+str(identity),p,minMeanCount,identity,countDict) #get the results from clustering
+  domains=createAbundanceMatrix(metadata,p,minMeanCount) #create abundance matrix
 
 if __name__=='__main__':
   arguments=parseArgs()

@@ -21,7 +21,7 @@ class Hirbin_run(object):
       while not not_created_dir:
         if os.path.isdir(new_output_dir):
           suffix=suffix+1
-          new_output_dir='hirbin_output_'+str(suffix)
+          new_output_dir='hirbin_output'+str(suffix)
         else:
           not_created_dir=True
       try:
@@ -37,7 +37,7 @@ class Hirbin_run(object):
           os.mkdir(output_directory)
         except OSError as e:
           raise
-    print output_directory
+    #print output_directory
     self.output_directory=output_directory
     return(output_directory)
   
