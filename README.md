@@ -33,7 +33,7 @@ Alternatively install the required python packages first by for example typing `
 
 After installing the python dependencies, clone hirbin using git and install the hirbin package:
 
-	git clone https://github.com/tobbeost/hirbin.git
+	git clone https://github.com/cmbio/hirbin.git
 	pip install hirbin/
 
 After installation type e.g. `functionalAnnotation.py -h` to see the options for the program.
