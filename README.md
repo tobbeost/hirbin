@@ -35,7 +35,7 @@ After installing the python dependencies, download the hirbin source code, extra
 
 	wget https://github.com/cmbio/hirbin/archive/v0.1.tar.gz
 	tar -xvf v0.1.tar.gz
-	pip install hirbin-v0.1/
+	pip install hirbin-0.1/
 
 After installation type e.g. `functionalAnnotation.py -h` to see the options for the program.
 
