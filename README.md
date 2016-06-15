@@ -31,9 +31,10 @@ the required packages inside:
 
 Alternatively install the required python packages first by for example typing `pip install biopython`.
 
-After installing the python dependencies, clone hirbin using git and install the hirbin package:
+After installing the python dependencies, download the hirbin source code, extract the files and install the hirbin package:
 
-	git clone https://github.com/cmbio/hirbin.git
+	wget https://github.com/cmbio/hirbin/archive/hirbin.tar.gz
+	tar -xvf hirbin.tar.gz
 	pip install hirbin/
 
 After installation type e.g. `functionalAnnotation.py -h` to see the options for the program.
