@@ -7,7 +7,7 @@ In this tutorial the supervised annotation of the reference sequences and mappin
 Getting started
 ----------------
 
-Start with having a look at the tutorial data. The example data used here is a subset of the Qin et al. (2012) dataset comparing the gut microbiota of 5 patients with t2d and 5 healthy patients.
+Start with having a look at the tutorial data. The data can be downloaded from [here](http://bioinformatics.math.chalmers.se/hirbin/data/). The example data used here is a subset of the Qin et al. (2012) dataset comparing the gut microbiota of 5 patients with t2d and 5 healthy patients.
 
 
 Step 1: Prepare the metadata file
