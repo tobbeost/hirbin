@@ -44,7 +44,6 @@ def runHMMer(sample_dict,ncpus,output_dir,database_dir,evalue_cutoff,protseq_dir
   ''' Run HMMer to perform functional annotation for all samples using n cpu:s'''
   p=Pool(ncpus)
   arglist=['--domtblout ' + output_dir +'/hmmeroutput/' + name + '.hmmout -E ' + evalue_cutoff + ' ' + database_dir + ' ' +  protseq_dir + '/'+ name +'.pep' for name in sample_dict.keys()]
-  print arglist
   p.map(functionalAnnotationOneSample,arglist)
 
 def functionalAnnotationOneSample(argument):

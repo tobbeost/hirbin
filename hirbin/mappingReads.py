@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-import hirbin.parsers
+from hirbin import *
+from hirbin.parsers import *
 import os
 import argparse
 import sys
@@ -21,5 +22,9 @@ def parseArgs(argv):
 
 
   
-def mapping()
+#def mapping():
+#  
+
+if __name__=='__main__':
+  args=parseArgs(sys.argv[1:])
 
