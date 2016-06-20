@@ -13,19 +13,19 @@ Start with having a look at the tutorial data. The data can be downloaded from [
 Step 1: Prepare the metadata file
 ----------------------------------
 
-HirBin uses the same metadata file throughout all analysis. In the metadata files the absolute or relative file paths to the different files are defined together with groups used for the statistical analysis. Since all samples are clustered together, it is necessary to run all samples in the same run. Create a file called `metadata.txt` in the tutorial directory and paste the following information:
+HirBin uses the same metadata file throughout all analysis. In the metadata files the absolute or relative file paths to the different files are defined together with groups used for the statistical analysis. Since all samples are clustered together, it is necessary to run all samples in the same run. Create a file called `metadata.txt` in the tutorial_data directory and paste the following information:
 
     name  group  reference  annotation  counts
-    DLM005  t2d  tutorial_data/contigs/protseq/DLM005.fasta  tutorial_data/TIGRFAM/DLM005.hmmout  tutorial_data/mapping_results2/DLM005.fastq.tab
-    DOM005  t2d  tutorial_data/contigs/protseq/DOM005.fasta  tutorial_data/TIGRFAM/DOM005.hmmout  tutorial_data/mapping_results2/DOM005.fastq.tab
-    DOM012  t2d  tutorial_data/contigs/protseq/DOM012.fasta  tutorial_data/TIGRFAM/DOM012.hmmout  tutorial_data/mapping_results2/DOM012.fastq.tab
-    DOM017  t2d  tutorial_data/contigs/protseq/DOM017.fasta  tutorial_data/TIGRFAM/DOM017.hmmout  tutorial_data/mapping_results2/DOM017.fastq.tab
-    DOM025  t2d  tutorial_data/contigs/protseq/DOM025.fasta  tutorial_data/TIGRFAM/DOM025.hmmout  tutorial_data/mapping_results2/DOM025.fastq.tab
-    NLM021  control  tutorial_data/contigs/protseq/NLM021.fasta  tutorial_data/TIGRFAM/NLM021.hmmout  tutorial_data/mapping_results2/NLM021.fastq.tab
-    NLM031  control  tutorial_data/contigs/protseq/NLM031.fasta  tutorial_data/TIGRFAM/NLM031.hmmout  tutorial_data/mapping_results2/NLM031.fastq.tab
-    NOM008  control  tutorial_data/contigs/protseq/NOM008.fasta  tutorial_data/TIGRFAM/NOM008.hmmout  tutorial_data/mapping_results2/NOM008.fastq.tab
-    NOM017  control  tutorial_data/contigs/protseq/NOM017.fasta  tutorial_data/TIGRFAM/NOM017.hmmout  tutorial_data/mapping_results2/NOM017.fastq.tab
-    NOM026  control  tutorial_data/contigs/protseq/NOM026.fasta  tutorial_data/TIGRFAM/NOM026.hmmout  tutorial_data/mapping_results2/NOM026.fastq.tab
+    DLM005  t2d  protseq/DLM005.fasta  TIGRFAM/DLM005.hmmout  mapping_results/DLM005.fastq.tab
+    DOM005  t2d  protseq/DOM005.fasta  TIGRFAM/DOM005.hmmout  mapping_results/DOM005.fastq.tab
+    DOM012  t2d  protseq/DOM012.fasta  TIGRFAM/DOM012.hmmout  mapping_results/DOM012.fastq.tab
+    DOM017  t2d  protseq/DOM017.fasta  TIGRFAM/DOM017.hmmout  mapping_results/DOM017.fastq.tab
+    DOM025  t2d  protseq/DOM025.fasta  TIGRFAM/DOM025.hmmout  mapping_results/DOM025.fastq.tab
+    NLM021  control  protseq/NLM021.fasta  TIGRFAM/NLM021.hmmout  mapping_results/NLM021.fastq.tab
+    NLM031  control  protseq/NLM031.fasta  TIGRFAM/NLM031.hmmout  mapping_results/NLM031.fastq.tab
+    NOM008  control  protseq/NOM008.fasta  TIGRFAM/NOM008.hmmout  mapping_results/NOM008.fastq.tab
+    NOM017  control  protseq/NOM017.fasta  TIGRFAM/NOM017.hmmout  mapping_results/NOM017.fastq.tab
+    NOM026  control  protseq/NOM026.fasta  TIGRFAM/NOM026.hmmout  mapping_results/NOM026.fastq.tab
 
 The headings for each column should be `name`, `group`, `reference`, `annotation` and `counts`, but the columns can be in any order. For more information on the input file formats, see the HirBin documentation.
 Note: Here the reads from each sample have been mapped to sample-specific referent files (per sample assembly). If a common reference is used, then the same file should be repeated in the reference column.
