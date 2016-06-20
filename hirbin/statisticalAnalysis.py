@@ -35,7 +35,7 @@ def main(mapping_file,output_dir,ref):
       filename=output_dir+'/'+filename
       print "Running statistical analysis for "+filename
       command=groupslist+' '+ref+' '+filename
-      path = pkg_resources.resource_filename('hirbin', 'statistical_analysis.R')
+      path = pkg_resources.resource_filename('hirbin.scripts', 'statistical_analysis.R')
       os.system('Rscript '+path+ ' ' + command)
   
 if __name__=='__main__':

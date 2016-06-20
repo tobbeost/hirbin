@@ -30,7 +30,7 @@ HirBin uses the same metadata file throughout all analysis. In the metadata file
     NOM026  control  protseq/NOM026.fasta  TIGRFAM/NOM026.hmmout  mapping_results/NOM026.fastq.tab
 
 The headings for each column should be `name`, `group`, `reference`, `annotation` and `counts`, but the columns can be in any order. For more information on the input file formats, see the HirBin documentation.
-Note: Here the reads from each sample have been mapped to sample-specific referent files (per sample assembly). If a common reference is used, then the same file should be repeated in the reference column.
+Note: Here the reads from each sample have been mapped to sample-specific reference files (per sample assembly). If a common reference is used, then the same file should be repeated in the reference column.
 
 Step 2: Unsupervised clustering (sub-binning)
 ----------------------------------------------

@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 from setuptools import setup
+from setuptools import find_packages
+pack=find_packages()
 
 setup(name='hirbin',
       version='0.1',
@@ -8,9 +10,10 @@ setup(name='hirbin',
       url='http://github.com/cmbio/hirbin',
       author='Tobias Osterlund',
       author_email='tobiaso@chalmers.se',
-      packages=setuptools.find_packages(),
-      package_data={'hirbin': ['README.md', 'hirbin/scripts/statistical_analysis.R']
+      packages=pack,
+      package_data={'hirbin': ['README.md', 'scripts/statistical_analysis.R']
                    },
+      include_package_data=True,
       install_requires=['Biopython', 
                         'multiprocessing'],
       classifiers=['Topic :: Scientific/Engineering :: Bio-Informatics'],
@@ -19,4 +22,5 @@ setup(name='hirbin',
                'hirbin/statisticalAnalysis.py',
                'hirbin/mappingReads.py'
               ],
+      
       zip_safe=False)
