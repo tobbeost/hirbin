@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-from hirbin import *
-from hirbin.parsers import *
+#from hirbin import *
+#from hirbin.parsers import *
+from parsers import *
 import os
 import argparse
 import sys

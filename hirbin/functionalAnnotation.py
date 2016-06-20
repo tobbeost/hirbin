@@ -3,6 +3,7 @@
 
 from hirbin import *
 from hirbin.parsers import *
+#from parsers import *
 import os
 from os import path, mkdir
 from os.path import isdir
@@ -24,6 +25,8 @@ def parseArgs(argv):
   parser.add_argument('-e','--e-value', dest='evalue_cutoff', default='1e-10', help='E-value cutoff [default = %(default)s]')
   parser.add_argument('-n', dest='n',help='number of threads [default = %(default)s]',default=1, type=int)
   parser.add_argument('-f',dest='force_output_directory',action="store_true",help='Force, if the output directory should be overwritten')
+  parser.add_argument('-p','--maxOverlap',dest='max_acceptable_overlap',default=0.1,help='Max percentage of acceptable sequence overlap for bins at the same contig (if overlapping more than p percent, take the best scoring HMM-profile), default=%(default)s')
+  parser.add_argument('--tentacle_format', dest='tentacle_format', action='store_true',help='Write the output in Tentacle format (default: gff format)')
   arguments=parser.parse_args(argv)
   return arguments
 
@@ -50,27 +53,39 @@ def functionalAnnotationOneSample(argument):
   ''' Run HMMer for one sample using 1 cpu'''
   os.system('hmmsearch '+ argument +'> /dev/null') #dispose unwanted output to /dev/null
 
-def main(mapping_file,database_dir,output_directory,type,ncpus,evalue_cutoff,force):
+def runConvertCoord(sample_dict,output_directory,protseq_dir,max_acceptable_overlap,tentacle_format):
+  '''Convert coordinates from protein to nucleotides and save in a file for annotation'''
+  for name in sample_dict:
+    if tentacle_format:
+      outputfilename=output_directory+'/'+name+'.tab'
+    else:
+      outputfilename=output_directory+'/'+name+'.gff'
+    convert_coordinates(protseq_dir+'/'+name+'.pep',output_directory+'/hmmeroutput/' + name + '.hmmout',outputfilename,tentacle_format,max_acceptable_overlap)
+
+
+def main(mapping_file,database_dir,output_directory,type,ncpus,evalue_cutoff,force,max_acceptable_overlap,tentacle_format):
   metadata=Hirbin_run(output_directory)
   metadata.readMetadata(mapping_file)
-  output_directory=metadata.createOutputDirectory(output_directory)
+  #output_directory=metadata.createOutputDirectory(output_directory)
   metadata.output_directory=output_directory
   if type.startswith("nucl"):
     #if protein sequences are missing, run translation
-    try:
-      mkdir(output_directory+'/protseq/')
-    except OSError as e:
-      if not force:
-        raise
-    protseq_dir=runTranslation(metadata.reference,ncpus,output_directory)
-    try:
-      mkdir(output_directory+'/hmmeroutput/')
-    except OSError as e:
-      if not force:
-        raise
-    runHMMer(metadata.reference,ncpus,output_directory,database_dir,evalue_cutoff,protseq_dir)
+    #try:
+    #  mkdir(output_directory+'/protseq/')
+    #except OSError as e:
+    #  if not force:
+    #    raise
+    #protseq_dir=runTranslation(metadata.reference,ncpus,output_directory)
+    #try:
+    #  mkdir(output_directory+'/hmmeroutput/')
+    #except OSError as e:
+    #  if not force:
+    #    raitopse
+    protseq_dir=output_directory+'/protseq/'
+    #runHMMer(metadata.reference,ncpus,output_directory,database_dir,evalue_cutoff,protseq_dir)
+    runConvertCoord(metadata.reference,output_directory,protseq_dir,max_acceptable_overlap,tentacle_format)
     #perform functional annotation using HMMer
 
 if __name__=='__main__':
   arguments=parseArgs(sys.argv[1:])
-  main(arguments.mapping_file,arguments.database_dir,arguments.output_dir,arguments.type,arguments.n,arguments.evalue_cutoff,arguments.force_output_directory)
+  main(arguments.mapping_file,arguments.database_dir,arguments.output_dir,arguments.type,arguments.n,arguments.evalue_cutoff,arguments.force_output_directory,arguments.max_acceptable_overlap,arguments.tentacle_format)

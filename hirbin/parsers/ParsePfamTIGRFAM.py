@@ -59,4 +59,4 @@ def load_annotation_pfam(filename):
     print "Number of motifs loaded: "+str(len(annot.keys()))
     #return annotation information as a tuple.
     output= (annot,start,stop,strand,evalue)
-    return(output)   
+    return(output)
