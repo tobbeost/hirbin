@@ -76,6 +76,16 @@ class Hirbin_run(object):
         self.counts={}
       else:
         self.counts=None
+      if 'reads1' in header:
+        reads1index=header.index('reads1')
+        self.reads1={}
+      else:
+        self.reads1=None
+      if 'reads2' in header:
+        reads2index=header.index('reads2')
+        self.reads2={}
+      else:
+        self.reads2=None
         
       for line in f:
         line=line.rstrip()
@@ -100,6 +110,14 @@ class Hirbin_run(object):
           co=line[countsindex]
           if samplename not in self.counts:
             self.counts[samplename]=co
+        if not (self.reads1 is None):
+          re1=line[reads1index]
+          if samplename not in self.reads1:
+            self.reads1[samplename]=re1
+        if not (self.reads2 is None):
+          re2=line[reads2index]
+          if samplename not in self.reads2:
+            self.reads2[samplename]=re2
 
     def getSamples(self):
       return self.groups.keys()
@@ -111,3 +129,7 @@ class Hirbin_run(object):
       return self.reference
     def getCounts(self):
       return self.counts
+    def getReads1(self):
+      return self.reads1
+    def getReads2(self):
+      return self.reads2

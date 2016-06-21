@@ -66,23 +66,25 @@ def runConvertCoord(sample_dict,output_directory,protseq_dir,max_acceptable_over
 def main(mapping_file,database_dir,output_directory,type,ncpus,evalue_cutoff,force,max_acceptable_overlap,tentacle_format):
   metadata=Hirbin_run(output_directory)
   metadata.readMetadata(mapping_file)
-  #output_directory=metadata.createOutputDirectory(output_directory)
+  output_directory=metadata.createOutputDirectory(output_directory)
   metadata.output_directory=output_directory
   if type.startswith("nucl"):
     #if protein sequences are missing, run translation
-    #try:
-    #  mkdir(output_directory+'/protseq/')
-    #except OSError as e:
-    #  if not force:
-    #    raise
-    #protseq_dir=runTranslation(metadata.reference,ncpus,output_directory)
-    #try:
-    #  mkdir(output_directory+'/hmmeroutput/')
-    #except OSError as e:
-    #  if not force:
-    #    raitopse
+    try:
+      mkdir(output_directory+'/protseq/')
+    except OSError as e:
+      if not force:
+        print "Output directory already exists, you can use an already existing output directory by including the flag -f"
+        raise
+    protseq_dir=runTranslation(metadata.reference,ncpus,output_directory)
+    try:
+      mkdir(output_directory+'/hmmeroutput/')
+    except OSError as e:
+      if not force:
+        print "Output directory already exists, you can use an already existing output directory by including the flag -f"
+        raise
     protseq_dir=output_directory+'/protseq/'
-    #runHMMer(metadata.reference,ncpus,output_directory,database_dir,evalue_cutoff,protseq_dir)
+    runHMMer(metadata.reference,ncpus,output_directory,database_dir,evalue_cutoff,protseq_dir)
     runConvertCoord(metadata.reference,output_directory,protseq_dir,max_acceptable_overlap,tentacle_format)
     #perform functional annotation using HMMer
 
