@@ -55,5 +55,5 @@ The external programs needed are:
 * [USEARCH (uclust) ](http://www.drive5.com/usearch/download.html) (used by `clusterBinsToSubbins.py`)
 * [R](https://cran.r-project.org/) (used by `statisticalAnalysis.py`)
 * Bowtie2 (used by mappingReads.py)
-* bedtoold (used by mappingReads.py)
+* bedtools (used by mappingReads.py)
 * samtools (used by mappingReads.py)
