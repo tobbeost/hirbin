@@ -70,7 +70,7 @@ def extract_sequences_one_sample(args):
   SeqIO.write(recordlist, outhandle, "fasta")
   outhandle.close()
   
-  print "done"
+  print "Done"
 
 def getSequencesPerDomain(metadata):
   '''
@@ -108,7 +108,7 @@ def extractSequences(metadata,n,force):
     os.mkdir(outputdir+'/forClustering/')
   except OSError as e:
     if not force:
-      print "Directory "+outputdir+'/forClustering/ already exists'
+      print "Error: Output directory already exists, you can use an already existing output directory by including the flag -f"
       raise
   fasta_list=metadata.reference.values()
   annot_list=metadata.annotation.values()
@@ -128,7 +128,7 @@ def getSubBins(groups,clustpath,cutoffnumber,minMeanCount,identity,countDict):
   cutoff=round(len(samplelisttotal)*cutoffnumber)
   domainlist=os.listdir(clustpath)
   directory="clust"+str(identity) #loop through each ID cutoff
-  print "getting subBins for " + directory
+  print "Getting subBins for " + directory
   countsvec={}#initiate counts vector
   countsvec[directory]={} #initiate counts vector
   for fname in domainlist:
@@ -149,7 +149,7 @@ def getSubBins(groups,clustpath,cutoffnumber,minMeanCount,identity,countDict):
               samplelist.append(sample)
               n+=1
         except KeyError:
-          print "No count data fouond for"+ contigID+'_'+domain
+          print "No count data found for"+ contigID+'_'+domain
           raise
              
       if n>=cutoff:
@@ -166,7 +166,7 @@ def getSubBins(groups,clustpath,cutoffnumber,minMeanCount,identity,countDict):
                 countsvec[directory][domain][key][sample]=countDict[contigID+'_'+domain][sample]
                   #check mean count
           except KeyError:
-            print "No count data fouond for"+ contigID+'_'+domain
+            print "No count data found for"+ contigID+'_'+domain
             raise
         meancount=sum(countsvec[directory][domain][key].values())/float(len(samplelist))
         if meancount<minMeanCount: #remove if mean count is less than minMeanCount.
@@ -175,7 +175,7 @@ def getSubBins(groups,clustpath,cutoffnumber,minMeanCount,identity,countDict):
   
   #countsvec[directory][domain][key][sample]=samplecount
   
-  print "writing counts to file for " + directory
+  print "Writing counts to file for " + directory
   g=open(clustpath+'/../abundance_matrix_subbins_'+directory+'.txt','w')
   samplelisttotal=sorted(samplelisttotal)
   for s in samplelisttotal:
@@ -191,7 +191,7 @@ def getSubBins(groups,clustpath,cutoffnumber,minMeanCount,identity,countDict):
                    g.write('\t0')
           g.write('\n')
   g.close()
-  print "done"
+  print "Done"
 
 
 
@@ -206,6 +206,7 @@ def main(mappingFile,output_directory,type,p,minMeanCount,identity,n,force):
     os.mkdir(output_directory+'/clust'+str(identity)) #create a directory for the clustering files
   except OSError as e:
     if not force:
+      print "Output directory already exists, you can use an already existing output directory by including the flag -f"
       raise
   runUclust(output_directory+"/forClustering/",identity) #run the clustering step
   countDict=getCountStruct(metadata) #read the results from the mapping

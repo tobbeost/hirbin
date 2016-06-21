@@ -36,6 +36,7 @@ class Hirbin_run(object):
         try:
           os.mkdir(output_directory)
         except OSError as e:
+          print "Output directory already exists, you can use an already existing output directory by including the flag -f"
           raise
     #print output_directory
     self.output_directory=output_directory
