@@ -8,9 +8,13 @@ where the sequences in each bin are clustered using `Uclust`.
 The four main hirbin programs are:
 
     functionalAnnotation.py
-	clusterBinsToSubbins.py
-	mappingReads.py
-	statisticalAnalysis.py
+   	mappingReads.py
+    clusterBinsToSubbins.py
+  	statisticalAnalysis.py
+
+Documentation
+-------------
+[HirBin documentation](https://github.com/cmbio/hirbin/wiki)
 
 
 Installation
@@ -50,3 +54,6 @@ The external programs needed are:
 * [EMBOSS transeq v6.5.7](ftp://emboss.open-bio.org/pub/EMBOSS/old/6.5.0/) (used by `functionalAnnotation.py`)
 * [USEARCH (uclust) ](http://www.drive5.com/usearch/download.html) (used by `clusterBinsToSubbins.py`)
 * [R](https://cran.r-project.org/) (used by `statisticalAnalysis.py`)
+* Bowtie2 (used by mappingReads.py)
+* bedtoold (used by mappingReads.py)
+* samtools (used by mappingReads.py)
