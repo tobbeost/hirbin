@@ -26,6 +26,8 @@ def parseArgs():
   parser.add_argument('-p','--minRepresented', dest='p', default=0.75, help='Require non-zero counts in at least the fraction p of the samples for the bin/sub-bin to be representative. (default:  %(default)s)')
   parser.add_argument('--minMeanCount', dest='minMeanCount', default=3, help='Minimum mean count per sample for the bin/sub-bin to be representative. (default:  %(default)s)')
   parser.add_argument('-n', dest='n',help='number of threads (default = %(default)s)',default=1, type=int)
+  parser.add_argument('--onlyClustering', dest='onlyClustering',action="store_true",help='Perform only clustering and parsing. Use when files for clustering already exists in the hirbin directory. (e.g. rerun clustering with new parameters).')
+  parser.add_argument('--onlyParsing', dest='onlyParsing',action="store_true",help='Perform only parsing. Use when files after clustering already exists in the hirbin directory.')
   parser.add_argument('-f',dest='force_output_directory',action="store_true",help='Force, if the output directory should be overwritten')
   arguments=parser.parse_args(sys.argv[1:]) 
   return arguments
@@ -195,24 +197,31 @@ def getSubBins(groups,clustpath,cutoffnumber,minMeanCount,identity,countDict):
 
 
 
-def main(mappingFile,output_directory,type,p,minMeanCount,identity,n,force):
+def main(mappingFile,output_directory,type,p,minMeanCount,identity,n,onlyClustering,onlyParsing,force):
   #reading metadata file and creating output directory
   metadata=Hirbin_run(output_directory)
   metadata.readMetadata(mappingFile)
   output_directory=metadata.createOutputDirectory(output_directory)
   metadata.output_directory=output_directory
-  extractSequences(metadata,n,force)
+  if not onlyClustering:
+    extractSequences(metadata,n,force)
   try:
     os.mkdir(output_directory+'/clust'+str(identity)) #create a directory for the clustering files
   except OSError as e:
     if not force:
       print "Output directory already exists, you can use an already existing output directory by including the flag -f"
       raise
-  runUclust(output_directory+"/forClustering/",identity) #run the clustering step
+  if not onlyParsing:
+    runUclust(output_directory+"/forClustering/",identity) #run the clustering step
   countDict=getCountStruct(metadata) #read the results from the mapping
   getSubBins(metadata.groups,output_directory+"/clust"+str(identity),p,minMeanCount,identity,countDict) #get the results from clustering
   domains=createAbundanceMatrix(metadata,p,minMeanCount) #create abundance matrix
 
 if __name__=='__main__':
   arguments=parseArgs()
-  main(arguments.mapping_file,arguments.output_dir,arguments.type,arguments.p,arguments.minMeanCount,arguments.identity,arguments.n,arguments.force_output_directory)
+  if arguments.onlyParsing:
+    arguments.onlyClustering=True
+  if arguments.onlyClustering==True:
+    arguments.force_output_directory=True
+  main(arguments.mapping_file,arguments.output_dir,arguments.type,arguments.p,arguments.minMeanCount,arguments.identity,arguments.n,arguments.onlyClustering,arguments.onlyParsing,arguments.force_output_directory)
+
