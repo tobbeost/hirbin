@@ -44,6 +44,7 @@ def writeAbundanceMatrix(metadata,domains):
 def filterAbundanceMatrix(metadata,domains,p,minMeanCount):
   '''Function for filtering the abundance matrix (for bins) based on minimum coverage and representation.'''
   samplelist=metadata.samples
+  p=float(p)
   cutoff=round(len(samplelist)*p)
   filtereddomains={}
   for tigrfam in domains:

@@ -127,6 +127,7 @@ def getSubBins(groups,clustpath,cutoffnumber,minMeanCount,identity,countDict):
     The sub-bins not passing the criteria numberOfSamples > cutoffnumber and meanCount>minMeanCount are excluded.
   '''
   samplelisttotal=groups.keys()
+  cutoffnumber=float(cutoffnumber)
   cutoff=round(len(samplelisttotal)*cutoffnumber)
   domainlist=os.listdir(clustpath)
   directory="clust"+str(identity) #loop through each ID cutoff
