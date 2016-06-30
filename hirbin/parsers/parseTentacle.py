@@ -7,15 +7,8 @@ def getCountStruct(metadata):
     print "Reading and saving mapping results..."
     filelist=metadata.counts
     countDict={}
-    n=len(filelist)
-    r=0
-    q=0
-    test=range(n/10,n+(n/10),n/10)
+
     for sample in filelist:
-        r=r+1
-        if r in test:
-           q+=1
-           print repr(q*10) + '%... '
         f=open(filelist[sample])
         for line in f:
             parts=line.split('\t')
@@ -80,9 +73,9 @@ def createAbundanceMatrix(metadata,p,minMeanCount):
       for line in f:
           name=line.split('\t')[0]
           count=int(line.split('\t')[1])
-          tigrfam=name.split('_')[2].split(':')[0]
+          tigrfam=name.split(':')[0].split('_')[-1]
           if tigrfam in str(range(0,10)): #check if TIGRFAM name ends with _1
-            tigrfam=name.split('_')[3].split(':')[0]
+            tigrfam=name.split(':')[0].split('_')[-2]
           if tigrfam not in domains:
              domains[tigrfam]={}
              for i in samplelist:
